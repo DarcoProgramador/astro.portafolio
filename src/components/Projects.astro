@@ -1,0 +1,127 @@
+---
+import GitHub from "./icons/GitHub.astro";
+import NextJS from "./icons/NextJS.astro";
+import Tailwind from "./icons/Tailwind.astro";
+import Link from "./icons/Link.astro";
+import LinkButton from "./LinkButton.astro";
+import AndroidStudio from "./icons/AndroidStudio.astro";
+import Firebase from "./icons/Firebase.astro";
+import Go from "./icons/Golang.astro";
+import ReactIcon from "./icons/React.astro";
+
+const TAGS = {
+  NEXT: {
+    name: "Next.js",
+    class: "bg-black text-white",
+    icon: NextJS,
+  },
+  TAILWIND: {
+    name: "Tailwind CSS",
+    class: "bg-[#003159] text-white",
+    icon: Tailwind,
+  },
+  ANDROID: {
+    name: "Android Studio",
+    class: "bg-green-500 text-white",
+    icon: AndroidStudio,
+  },
+  FIREBASE: {
+    name: "Firebase",
+    class: "bg-yellow-500 text-white",
+    icon: Firebase,
+  },
+  GO: {
+    name: "Golang",
+    class: "bg-blue-500 text-white",
+    icon: Go,
+  },
+  REACT: {
+    name: "React",
+    class: "bg-[#003159] text-white",
+    icon: ReactIcon,
+  },
+};
+const PROJECTS = [
+  {
+    title: "Hartarte - Recetas de cocina",
+    description:
+      "App de recetas de cocina desarrollada para una feria de desarrollo mobile en la Universidad Nacional de Ingenieria(UNI) utilizando Android Studio, Jetpack Compose y Firebase.",
+    github: "https://github.com/DarcoProgramador/Hartarte",
+    image: "/projects/hartarte_app.png",
+    tags: [TAGS.ANDROID, TAGS.FIREBASE],
+  },
+  {
+    title: "Sistema de gestión de servicios de auto-lavado",
+    description:
+      "Un sistema para la gestion de los servicios del auto-lavado de la parrillada de cesar. fue desarrollado utilizando Next.js con la libreria de componentes de MUI y con GO como back-end.",
+    image: "/projects/auto_lavado.png",
+    tags: [TAGS.NEXT, TAGS.GO, TAGS.REACT],
+  },
+  {
+    title: "Url shortener",
+    description:
+      "Pequeña demo de un acortador de url echa en golang con base de datos de postgrest SQL.",
+    image: "/projects/url_short.png",
+    tags: [TAGS.GO],
+    link: "https://darcoprogramador.github.io/url-shortener/client/",
+    github: "https://github.com/DarcoProgramador/url-shortener",
+  },
+];
+---
+
+<div class="flex flex-col gap-y-16">
+  {
+    PROJECTS.map(({ image, title, description, link, tags, github }) => (
+      <article class="flex flex-col space-x-0 space-y-8 group md:flex-row md:space-x-8 md:space-y-0">
+        <div class="w-full md:w-1/2">
+          <div class="relative flex flex-col items-center col-span-6 row-span-5 gap-8 transition duration-500 ease-in-out transform shadow-xl overflow-clip rounded-xl sm:rounded-xl md:group-hover:-translate-y-1 md:group-hover:shadow-2xl lg:border lg:border-gray-800 lg:hover:border-gray-700 lg:hover:bg-gray-800/50">
+            <img
+              alt="Proyectos de DarcoProgramador"
+              class="object-cover object-top w-full h-56 transition duration-500 sm:h-full md:scale-110 md:group-hover:scale-105"
+              loading="lazy"
+              src={image}
+            />
+          </div>
+        </div>
+
+        <div class="w-full md:w-1/2 md:max-w-lg">
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
+            {title}
+          </h3>
+          <div class="flex flex-wrap mt-2">
+            <ul class="flex flex-row mb-2 gap-x-2">
+              {tags.map((tag) => (
+                <li>
+                  <span
+                    class={`flex gap-x-2 rounded-full text-xs ${tag.class} py-1 px-2 `}
+                  >
+                    <tag.icon class="size-4" />
+                    {tag.name}
+                  </span>
+                </li>
+              ))}
+            </ul>
+
+            <div class="mt-2 text-gray-700 dark:text-gray-400">
+              {description}
+            </div>
+            <footer class="flex items-end justify-start mt-4 gap-x-4">
+              {github && (
+                <LinkButton href={github}>
+                  <GitHub class="size-6" />
+                  Code
+                </LinkButton>
+              )}
+              {link && (
+                <LinkButton href={link}>
+                  <Link class="size-4" />
+                  Preview
+                </LinkButton>
+              )}
+            </footer>
+          </div>
+        </div>
+      </article>
+    ))
+  }
+</div>
